@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //dd(asset('storage/images/2-carpenter-tools-banner-1.jpg'));
         return view('home');
     }
 
