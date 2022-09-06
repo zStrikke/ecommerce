@@ -16,8 +16,17 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('/');
 
 Auth::routes();
 
+Route::middleware(['web'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('user', App\Http\Controllers\Admin\UserController::class);
+});
+
+// Me gusta mas esta forma
+Route::group(['middleware' => 'web', 'prefix' => 'admin', 'as' => 'admin.'], function (){
+    Route::resource('product', App\Http\Controllers\Admin\ProductController::class);
+    Route::resource('category', App\Http\Controllers\Admin\CategoryController::class);
+});
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

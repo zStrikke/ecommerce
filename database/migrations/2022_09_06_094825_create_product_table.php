@@ -20,7 +20,7 @@ class CreateProductTable extends Migration
             $table->string('SKU');
             $table->string('price');
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('product_category');
+            $table->foreign('category_id')->references('id')->on('product_categories');
             $table->unsignedBigInteger('inventory_id');
             $table->foreign('inventory_id')->references('id')->on('product_inventory');
             $table->unsignedBigInteger('discount_id');
