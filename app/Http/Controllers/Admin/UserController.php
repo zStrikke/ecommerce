@@ -16,18 +16,18 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $usersChart = User::get(['created_at'])->map(function($item, $key){ return $item->created_at->month;});
-        // dd($usersChart);
-        //$gouped = $usersChart->groupBy(function($item, $key){return $item;});
-        // dd($gouped);
-        $u = $usersChart->groupBy(function($item, $key){return $item;})->map(function($item, $key){return $item->count();});
-        // dd($u->all());
-        $p = $u->sortKeys();
-        // dd($p->all());
-        $monthCollection = collect(['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']);
-        $finalData = $monthCollection->combine($p);
+        // $usersChart = User::get(['created_at'])->map(function($item, $key){ return $item->created_at->month;});
+        // // dd($usersChart);
+        // //$gouped = $usersChart->groupBy(function($item, $key){return $item;});
+        // // dd($gouped);
+        // $u = $usersChart->groupBy(function($item, $key){return $item;})->map(function($item, $key){return $item->count();});
+        // // dd($u->all());
+        // $p = $u->sortKeys();
+        // // dd($p->all());
+        // $monthCollection = collect(['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']);
+        // $finalData = $monthCollection->combine($p);
         
-        // dd($finalData->toJson());
+        // // dd($finalData->toJson());
 
 
         $users = User::query();
@@ -52,8 +52,7 @@ class UserController extends Controller
         // dd($usersChart);
 
         return view('admin.users.index')
-            ->with(['users' => $finalUsersTable,
-                    'usersChart' => $finalData->all()]);
+            ->with(['users' => $finalUsersTable]);
     }
 
     /**

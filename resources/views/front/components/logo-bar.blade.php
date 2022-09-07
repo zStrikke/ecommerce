@@ -6,14 +6,14 @@
     </div>
     <!-- END Logo -->
     <!-- search + Category List Select -->
-        @include('partials.logo-bar.search')
+        @include('front.components.search')
     <!-- END Category List For Search -->
     <div class="wrap-icon right-section">
         <!-- Wish List -->
-        @include('partials.logo-bar.wish-list')
+        @include('front.components.wish-list')
         <!-- END Wish List -->
         <!-- Cart -->
-        @include('partials.logo-bar.cart')
+        @include('front.components.cart')
         <!-- END Cart -->
         <div class="wrap-icon-section show-up-after-1024">
             <a href="#" class="mobile-navigation">

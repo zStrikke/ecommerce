@@ -37,21 +37,21 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- Top Bar Menu -->
-                @include('layouts.header.top-bar')
+                @include('front.components.top-bar')
                 <!-- END Top Bar Menu -->
 
                 <div class="container">
                     <!-- Navbar with logo + SearchBar + Wishlist + Cart -->
-                    @include('layouts.header.logo-bar')
+                    @include('front.components.logo-bar')
                     <!-- END Navbar with logo + SearchBar + Wishlist + Cart -->
                 </div>
 
                 <div class="nav-section header-sticky">
                     <!-- Hot Section TODO: ver como referenciarlo en la BBDD--> 
-                    @include('layouts.header.hot-bar')
+                    @include('front.components.hot-bar')
                     <!-- END Hot Section --> 
                     <!-- Sticky Header -->
-                    @include('layouts.header.nav-bar')
+                    @include('front.components.nav-bar')
                     <!-- END Sticky Header -->
                 </div>
             </div>
@@ -67,19 +67,19 @@
     <footer id="footer">
         <div class="wrap-footer-content footer-style-1">
             <!-- Shipping + Guarantee + Payment + Support -->
-            @include('layouts.footer.online-info')
+            @include('front.components.online-info')
             <!--END Shipping + Guarantee + Payment + Support-->
 
             <div class="main-footer-content">
                 <!-- INFO FOOTER -->
-                @include('layouts.footer.info-footer')
+                @include('front.components.info-footer')
                 <!-- END Info Footer -->
                 <!-- Quick Links -->
-                @include('layouts.footer.quick-links')
+                @include('front.components.quick-links')
                 <!-- END Quick Links -->
             </div>
             <!-- Copyright footer -->
-            @include('layouts.footer.copyright-footer')
+            @include('front.components.copyright-footer')
             <!-- END Copiright footer -->
         </div>
     </footer>

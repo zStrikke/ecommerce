@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('/');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 
 Auth::routes();
 
@@ -33,4 +31,3 @@ Route::group(['middleware' => 'web', 'prefix' => 'admin', 'as' => 'admin.'], fun
     Route::resource('category', App\Http\Controllers\Admin\CategoryController::class);
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

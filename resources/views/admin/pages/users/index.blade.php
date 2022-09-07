@@ -99,31 +99,6 @@
 @section('js')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-
-  const data = {
-    datasets: [{
-      label: 'My First dataset',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: @json($usersChart),
-    }]
-  };
-
-  const config = {
-    type: 'line',
-    data: data,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-  };
-
-  const myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
+      console.log('Hi There!')
     </script>
 @stop

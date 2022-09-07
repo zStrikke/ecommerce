@@ -14,10 +14,10 @@
                 <li class="menu-item"><a title="Register or Login" href="{{ route('register') }}">{{ __('Register') }}</a>
                 </li>
                 <!-- Select Language Component -->
-                    @include('partials.top-bar.select-language')
+                    @include('front.components.select-language')
                 <!-- END Select Language Component -->
                 <!-- Select Money Component -->
-                    @include('partials.top-bar.select-money')
+                    @include('front.components.select-money')
                 <!-- END Select Money Component -->
             </ul>
         </div>
