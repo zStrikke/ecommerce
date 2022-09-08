@@ -11,6 +11,14 @@ class Discount extends Model
 
     protected $guarded = [];
 
+    /**
+     * Local Scopes
+     */
+    public function scopeAvailable($query)
+    {
+        return $query->where('active', true);
+    }
+
     public function product()
     {
         return $this->hasMany(Product::class);

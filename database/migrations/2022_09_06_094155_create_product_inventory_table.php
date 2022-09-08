@@ -17,7 +17,6 @@ class CreateProductInventoryTable extends Migration
             $table->id();
             $table->string('quantity');
             $table->timestamps();
-            $table->timestamp('deleted_at')->nullable();
         });
     }
 

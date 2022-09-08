@@ -42,7 +42,7 @@ class CategoryController extends Controller
         $validated = $request->validate([ // Esto devuelve un array...
             'category_parent_id' => 'sometimes|required|exists:product_categories,id',
             'category_name' => 'required|unique:product_categories,name|min:3|max:25',
-            'category_desc' => 'required|min:3|max:255'
+            'category_description' => 'required|min:3|max:255'
         ]);
 
         // Para crear la categoria vemos si viene con una category_parent_id
@@ -51,13 +51,13 @@ class CategoryController extends Controller
             ProductCategory::create([
                 'parent_id' => $validated['category_parent_id'],
                 'name' => $validated['category_name'],
-                'desc' => $validated['category_desc']
+                'descripction' => $validated['category_description']
             ]);
         } else {
             // Es una categoria padre
             ProductCategory::create([
                 'name' => $validated['category_name'],
-                'desc' => $validated['category_desc']
+                'description' => $validated['category_description']
             ]);
         }
 

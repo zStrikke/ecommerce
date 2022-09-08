@@ -20,6 +20,11 @@ class ProductCategory extends Model
         return $query->whereNull('parent_id');
     }
 
+    public function scopeChildCategories($query)
+    {
+        return $query->whereNotNull('parent_id');
+    }
+
     public function scopeChildOf($query, $parent)
     {
         return $query->where('parent_id', $parent);
@@ -30,7 +35,7 @@ class ProductCategory extends Model
      */
     public function getShortDescAttribute()
     {
-        return Str::limit($this->attributes['desc'], 20, '...');
+        return Str::limit($this->attributes['description'], 20, '...');
     }
      /**
       * Eloquent Relations
@@ -42,12 +47,12 @@ class ProductCategory extends Model
 
     public function parent()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(ProductCategory::class);
     }
 
-    public function children()
+    public function childrens()
     {
-        return $this->hasMany(Category::class);
+        return $this->hasMany(ProductCategory::class, 'parent_id');
     }
 
 

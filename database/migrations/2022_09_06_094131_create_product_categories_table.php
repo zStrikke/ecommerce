@@ -17,10 +17,9 @@ class CreateProductCategoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('product_categories');
-            $table->string('name');
-            $table->string('desc');
+            $table->string('name')->nullable(false);
+            $table->string('description');
             $table->timestamps();
-            $table->timestamp('deleted_at')->nullable();
         });
     }
 

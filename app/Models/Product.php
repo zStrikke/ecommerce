@@ -12,6 +12,18 @@ class Product extends Model
 
     protected $guarded = [];
 
+    /**
+     * Mutator
+     */
+    public function setCategoryAttribute($value)
+    {
+        $this->attributes['category_id'] = $value;
+    }
+
+    /**
+     * Relations
+     */
+
     public function product_categories()
     {
         return $this->belongsTo(ProductCategory::class);

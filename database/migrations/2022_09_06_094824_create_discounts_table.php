@@ -16,11 +16,10 @@ class CreateDiscountsTable extends Migration
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('desc');
+            $table->string('description');
             $table->string('discount_percent');
             $table->boolean('active');
             $table->timestamps();
-            $table->timestamp('deleted_at')->nullable();
         });
     }
 

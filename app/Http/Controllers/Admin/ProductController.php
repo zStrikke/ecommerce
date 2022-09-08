@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -30,7 +32,16 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.products.create');
+        // Cogemos los cupones disponibles a aplicar
+        $discounts = \App\Models\Discount::available()->get(['id','name','description','discount_percent']);
+        // Cogemos las Categorias a las que se puede asociar el producto. Estan de padre a hijo para que sea mas facil listarlas.
+        $categories = \App\Models\ProductCategory::parentCategories()->with('childrens:id,parent_id,name,description')->get(['id','parent_id','name','description']);
+
+        return view('admin.pages.products.create')
+                ->with([
+                    'discounts' => $discounts,
+                    'categories' => $categories
+                ]);
     }
 
     /**
@@ -39,24 +50,21 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        dd($request->all());
-        $product = \App\Models\Product::create([
-            'name' => $request->name,
-            'sku' => $request->sku,
-            'price' => $request->price
-        ]);
+        $product = \App\Models\Product::create(
+            $request->safe()->except('file')
+        );
 
-        // $product = \App\Models\Product::find(1);
-        $path = $request->file('file')->storePublicly('products', 'public');
-
-        $product->images()->create([
-            'path' => $path,
-            'highlight' => false
-        ]);
-
-        // dd(asset('storage/' . $product->images()->highlight()->path));
+        if($request->hasFile('file') && $request->file('file')->isValid()){
+            
+            $path = $request->file('file')->store('products/images', 'public');
+    
+            $product->images()->create([
+                'path' => $path,
+            ]);
+        }
+        return redirect()->route('admin.products.create')->with('status','Product Created succesfully');
     }
 
     /**
