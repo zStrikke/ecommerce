@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -14,7 +16,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+         Product::withExists('images')->having('images_exists', 1)->get();
+        //"select `products`.*, exists(select * from `product_images` where `products`.`id` = `product_images`.`product_id`) as `images_exists` from `products` having `images_exists` = ?"
+        
+        //dd(asset('productos/jrZGrrM1PFfMwFhRIa2yKD5M7rvvbCP0rmeMOE02.jpg'));
+        return view('admin.pages.products.index');
     }
 
     /**
@@ -24,7 +30,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.products.create');
     }
 
     /**
@@ -35,7 +41,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
+        $product = \App\Models\Product::create([
+            'name' => $request->name,
+            'sku' => $request->sku,
+            'price' => $request->price
+        ]);
+
+        // $product = \App\Models\Product::find(1);
+        $path = $request->file('file')->storePublicly('products', 'public');
+
+        $product->images()->create([
+            'path' => $path,
+            'highlight' => false
+        ]);
+
+        // dd(asset('storage/' . $product->images()->highlight()->path));
     }
 
     /**

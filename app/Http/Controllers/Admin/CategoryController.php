@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category.index')
+        return view('admin.pages.categories.index')
             ->with('categories', ProductCategory::orderBy('parent_id')->get()); // Asi saca primero las sin parent_id (categorias padre)
     }
 
@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create')
+        return view('admin.pages.categories.create')
                 ->with('parent_categories', ProductCategory::parentCategories()->get(['id', 'name']));
     }
 

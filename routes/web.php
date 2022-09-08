@@ -22,12 +22,10 @@ Route::middleware(['web'])->prefix('admin')->name('admin.')->group(function () {
     // php artisan route:list --name=user
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
 });
-//TODO: no se por que no me deja ponerlo en los grupos de rutas.
-Route::get('users/getusers', [App\Http\Controllers\Admin\UserController::class, 'getUsers'])->name('users.getusers');
 
 // Me gusta mas esta forma
 Route::group(['middleware' => 'web', 'prefix' => 'admin', 'as' => 'admin.'], function (){
-    Route::resource('product', App\Http\Controllers\Admin\ProductController::class);
-    Route::resource('category', App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
+    Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
 });
 

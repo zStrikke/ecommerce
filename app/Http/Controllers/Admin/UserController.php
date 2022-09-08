@@ -51,7 +51,7 @@ class UserController extends Controller
 
         // dd($usersChart);
 
-        return view('admin.users.index')
+        return view('admin.pages.users.index')
             ->with(['users' => $finalUsersTable]);
     }
 
