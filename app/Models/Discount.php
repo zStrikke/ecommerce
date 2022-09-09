@@ -19,7 +19,7 @@ class Discount extends Model
         return $query->where('active', true);
     }
 
-    public function product()
+    public function products()
     {
         return $this->hasMany(Product::class);
     }

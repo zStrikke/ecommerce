@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+Route::get('/shop/electronics/consoles', [App\Http\Controllers\ShopController::class, 'index'])->name('shop.index');
+Route::get('/shop/{productCategory}', [App\Http\Controllers\ShopController::class, 'shopCategories']); //TODO: un monton de cosas.
+Route::get('/cart', [App\Http\Controllers\HomeController::class, 'cart'])->name('cart');
+Route::get('/cart/checkout', [App\Http\Controllers\HomeController::class, 'checkout'])->name('checkout');
+Route::get('/shop/{product}', [App\Http\Controllers\HomeController::class, 'product'])->name('productDetails');
 
 Auth::routes();
 
@@ -28,4 +33,5 @@ Route::group(['middleware' => 'web', 'prefix' => 'admin', 'as' => 'admin.'], fun
     Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
 });
+
 

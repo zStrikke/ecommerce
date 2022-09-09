@@ -11,9 +11,9 @@ class CartItem extends Model
 
     protected $guarded = [];
 
-    public function shopping_session()
+    public function session()
     {
-        return $this->belongsTo(ShoppingSession::class);
+        return $this->belongsTo(\App\Models\Session::class );
     }
 
     public function product()

@@ -27,8 +27,13 @@ class HomeController extends Controller
         return view('front.pages.index');
     }
 
-    public function inicio()
+    public function shop()
     {
-        return view('inicio');
+        return view('front.pages.shop');
+    }
+    
+    public function cart()
+    {
+        return view('front.pages.cart');
     }
 }

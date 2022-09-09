@@ -48,7 +48,7 @@ class User extends Authenticatable
      /**
       * Relations
       */
-    public function user_address()
+    public function user_addresses()
     {
         return $this->hasMany(UserAddress::class);
     }
@@ -63,9 +63,21 @@ class User extends Authenticatable
         return $this->hasMany(OrderDetails::class);
     }
 
-    public function shopping_session()
+    // public function sessions()
+    // {
+    //     return $this->hasMany(ShoppingSession::class);
+    // }
+
+    public function cart_items()
     {
-        return $this->hasOne(ShoppingSession::class);
+        return $this->hasManyThrough(
+            CartItem::class,
+            \App\Models\Session::class,
+            // 'user_id', // Foreign key on the sessions table...
+            // 'session_id', // Foreign key on the cart_items table...
+            // 'id', // Local key on the projects table...
+            // 'id' // Local key on the environments table...
+        );
     }
 
 }
