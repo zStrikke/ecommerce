@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProductCategory;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.pages.categories.index')
-            ->with('categories', ProductCategory::orderBy('parent_id')->get()); // Asi saca primero las sin parent_id (categorias padre)
+            ->with('categories', Category::orderBy('parent_id')->get()); // Asi saca primero las sin parent_id (categorias padre)
     }
 
     /**
@@ -27,7 +27,7 @@ class CategoryController extends Controller
     public function create()
     {
         return view('admin.pages.categories.create')
-                ->with('parent_categories', ProductCategory::parentCategories()->get(['id', 'name']));
+                ->with('parent_categories', Category::parentCategories()->get(['id', 'name']));
     }
 
     /**
@@ -40,22 +40,22 @@ class CategoryController extends Controller
     {
         // validamos
         $validated = $request->validate([ // Esto devuelve un array...
-            'category_parent_id' => 'sometimes|required|exists:product_categories,id',
-            'category_name' => 'required|unique:product_categories,name|min:3|max:25',
+            'category_parent_id' => 'sometimes|required|exists:categories,id',
+            'category_name' => 'required|unique:categories,name|min:3|max:25',
             'category_description' => 'required|min:3|max:255'
         ]);
 
         // Para crear la categoria vemos si viene con una category_parent_id
         if (array_key_exists('category_parent_id', $validated)) {
             // Es una subcategoria
-            ProductCategory::create([
+            Category::create([
                 'parent_id' => $validated['category_parent_id'],
                 'name' => $validated['category_name'],
                 'descripction' => $validated['category_description']
             ]);
         } else {
             // Es una categoria padre
-            ProductCategory::create([
+            Category::create([
                 'name' => $validated['category_name'],
                 'description' => $validated['category_description']
             ]);
@@ -69,10 +69,10 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProductCategory  $productCategory
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductCategory $productCategory)
+    public function show(Category $category)
     {
         //
     }
@@ -80,10 +80,10 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProductCategory  $productCategory
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductCategory $productCategory)
+    public function edit(Category $category)
     {
         //
     }
@@ -92,10 +92,10 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProductCategory  $productCategory
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductCategory $productCategory)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -103,10 +103,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProductCategory  $productCategory
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductCategory $productCategory)
+    public function destroy(Category $category)
     {
         //
     }

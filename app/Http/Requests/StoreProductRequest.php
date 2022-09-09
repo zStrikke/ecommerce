@@ -30,7 +30,7 @@ class StoreProductRequest extends FormRequest
             'price' => 'required|digits_between:0,10000',
             'onsale' => 'sometimes|boolean',
             'public' => 'sometimes|boolean',
-            'category' => 'required|exists:product_categories,id',
+            'category' => 'required|exists:categories,id',
             //'inventory' => 'required|exists:product_inventory,id', TODO: aclarar esta mierda
             'discount' => 'sometimes|exists:discounts,id',
             'file' => 'required|image|min:1|max:4000'

@@ -10,6 +10,7 @@ class CartItem extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $touches = ['cart'];
 
     public function session()
     {

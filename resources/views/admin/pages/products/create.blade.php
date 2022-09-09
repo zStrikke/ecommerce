@@ -79,8 +79,8 @@
       @enderror
     </div>
     <div class="form-group col-md-2">
-      <label for="selectProductCategory">{{ __('Category') }}</label>
-      <select id="selectProductCategory" name="category" class="form-control @error('category') is-invalid @enderror">
+      <label for="selectCategory">{{ __('Category') }}</label>
+      <select id="selectCategory" name="category" class="form-control @error('category') is-invalid @enderror">
           <option disabled selected>{{ __('Choose a category') }}</option>
           @forelse ($categories as $parentCategory)
               <optgroup label="{{ $parentCategory->name }}">
@@ -95,13 +95,13 @@
           @endforelse
       </select>
       @error('category')
-        <div id="validationServerProductCategoryFeedback" class="invalid-feedback">
+        <div id="validationServerCategoryFeedback" class="invalid-feedback">
           {{ $message }}
         </div>
       @enderror
     </div>
     <div class="form-group col-md-2">
-      <label for="selectProductCategory">{{ __('Extra') }}</label>
+      <label for="selectCategory">{{ __('Extra') }}</label>
       <div class="custom-control custom-switch">
         <input type="checkbox" value="1" name="public" {{ old('public') == '1' ? 'checked' : '' }} class="custom-control-input @error('public') is-invalid @enderror" id="inputProductPublic">
         <label class="custom-control-label" for="inputProductPublic">{{ __('Public') }}</label>

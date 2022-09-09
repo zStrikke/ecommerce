@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\ProductCategory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductCategoryFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -24,7 +24,7 @@ class ProductCategoryFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'parent_id' => ProductCategory::get()->random(),
+                'parent_id' => Category::get()->random(),
             ];
         });
     }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CartItem;
 use App\Models\Product;
-use App\Models\ProductCategory;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -30,7 +30,7 @@ class ShopController extends Controller
                 ->with('products', $products);
     }
 
-    public function shopCategories(ProductCategory $productCategory)
+    public function shopCategories(Category $category)
     {
         if(auth()->check())
             dd(auth()->user()->cart_items);

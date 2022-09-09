@@ -15,8 +15,12 @@ class CreateOrderDetailsTable extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-            $table->string('total');
-            $table->unsignedBigInteger('user_id');
+            // $table->smallInteger('status')->default(0);
+            $table->float('total')->nullable(false);
+            // $table->float('subtotal')->nullable(false); Ya me preocupare de esto mas adelante
+            // $table->float('tax')->nullable(false);
+            $table->string('session_id')->nullable(false);
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

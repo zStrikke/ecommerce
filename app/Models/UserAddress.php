@@ -10,6 +10,7 @@ class UserAddress extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $touches = ['user'];
 
     public function user()
     {

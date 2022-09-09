@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\ProductCategory;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -35,7 +35,7 @@ class ProductController extends Controller
         // Cogemos los cupones disponibles a aplicar
         $discounts = \App\Models\Discount::available()->get(['id','name','description','discount_percent']);
         // Cogemos las Categorias a las que se puede asociar el producto. Estan de padre a hijo para que sea mas facil listarlas.
-        $categories = \App\Models\ProductCategory::parentCategories()->with('childrens:id,parent_id,name,description')->get(['id','parent_id','name','description']);
+        $categories = \App\Models\Category::parentCategories()->with('childrens:id,parent_id,name,description')->get(['id','parent_id','name','description']);
 
         return view('admin.pages.products.create')
                 ->with([

@@ -23,9 +23,9 @@ class Product extends Model
      * Relations
      */
 
-    public function product_categories()
+    public function categories()
     {
-        return $this->belongsTo(ProductCategory::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function product_inventory()
