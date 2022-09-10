@@ -25,8 +25,8 @@ class CreateProductsTable extends Migration
             $table->boolean('public')->default(false);
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->unsignedBigInteger('inventory_id')->nullable();
-            $table->foreign('inventory_id')->references('id')->on('product_inventory');
+            // $table->unsignedBigInteger('inventory_id')->nullable(); TODO: Hacerlo, jejej
+            // $table->foreign('inventory_id')->references('id')->on('product_inventory');
             $table->unsignedBigInteger('discount_id')->nullable();
             $table->foreign('discount_id')->references('id')->on('discounts');
             $table->timestamps();

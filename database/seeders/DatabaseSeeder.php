@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use Database\Factories\UserAddressesFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,10 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(100)->create();
-        //\App\Models\Category::factory(4)->create();
+        // https://laravel.com/docs/8.x/database-testing#has-many-relationships
+        \App\Models\User::factory(100)->has(\App\Models\UserAddress::factory(), 'user_addresses')->create();
         $this->call([
             CategorySeeder::class,
+            ProductSeeder::class,
+            DiscountSeeder::class,
         ]);
+        \App\Models\Review::factory(7)->create();
+        \App\Models\Review::factory(3)->with_parent()->create();
     }
 }

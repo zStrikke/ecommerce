@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductReviewsTable extends Migration
+class CreateReviewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateProductReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_reviews', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
             $table->text('content')->nullable(false);
-            $table->smallInteger('rating')->nullable(false);
+            $table->smallInteger('rating')->nullable();
             $table->boolean('published')->default(true);
             $table->boolean('buy_verified')->nullable();
             $table->unsignedBigInteger('product_id')->nullable();
@@ -25,7 +25,7 @@ class CreateProductReviewsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('product_reviews');
+            $table->foreign('parent_id')->references('id')->on('reviews');
             $table->timestamps();
         });
     }
@@ -37,6 +37,6 @@ class CreateProductReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_reviews');
+        Schema::dropIfExists('reviews');
     }
 }

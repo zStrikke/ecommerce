@@ -12,8 +12,9 @@ class Product extends Model
     protected $guarded = [];
 
     /**
-     * Mutator
+     * Mutators
      */
+    // Triquinuela para que al settear desde los campos de formulario poder poner el nombre 'category' en el input.
     public function setCategoryAttribute($value)
     {
         $this->attributes['category_id'] = $value;

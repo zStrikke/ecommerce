@@ -14,20 +14,7 @@ class ShopController extends Controller
 {
     public function index()
     {
-        //dd(auth()->user());
-        
-        if(auth()->check()){
-            CartItem::create([
-                'session_id' => session()->getId(),
-                'product_id' => 1
-            ]);
-        }
-
-        // auth()->user()->cart_items;
-
-        $products = Product::get();
-        return view('front.pages.shop')
-                ->with('products', $products);
+        return Product::get();
     }
 
     public function shopCategories(Category $category)
