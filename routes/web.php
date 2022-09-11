@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +15,28 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', [App\Http\Controllers\ShopController::class, 'index'])->name('shop.index');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+
+// Otra forma de afrontar la cosa y evitar urls largas podria ser:
+// Route::get('/c/{category?}/s/{subcategory?}', function(Category $category, ...) { ...
+Route::get('/{category}/{subcategory}/{product}',
+            [App\Http\Controllers\Front\ProductController::class, 'index'])->where([
+                'categorySlug' => '[a-z]+',
+                'subCategorySlug' => '[a-z]+',
+                'productSlug' => '^[a-z0-9]+(?:-[a-z0-9]+)*$' // https://ihateregex.io/expr/url-slug/
+            ]);
+
+            
+Route::get('/{categorySlug}/{subCategorySlug}/',
+            [App\Http\Controllers\Front\SubCategoryController::class, 'index'])->where([
+                'categorySlug' => '[a-z]+',
+                'subCategorySlug' => '[a-z]+',
+            ]);
+
+Route::get('/{categorySlug}',
+            [App\Http\Controllers\Front\CategoryController::class, 'index'])->where([
+                'categorySlug' => '[a-z]+',
+            ]);
 
 Auth::routes();
 

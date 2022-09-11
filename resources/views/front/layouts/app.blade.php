@@ -58,11 +58,7 @@
         </div>
     </header>
 
-    <main id="main">
-        @yield('content')
-    </main>
-
-
+    @yield('content')
 
     <footer id="footer">
         <div class="wrap-footer-content footer-style-1">

@@ -21,9 +21,9 @@ class CreateProductsTable extends Migration
             $table->string('summary')->nullable();
             $table->string('SKU')->unique();
             $table->float('price')->nullable(false);
-            $table->boolean('onsale')->default(false);
-            $table->boolean('public')->default(false);
-            $table->unsignedBigInteger('category_id')->nullable();
+            $table->boolean('is_onsale')->default(false);
+            $table->boolean('is_public')->default(false);
+            $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             // $table->unsignedBigInteger('inventory_id')->nullable(); TODO: Hacerlo, jejej
             // $table->foreign('inventory_id')->references('id')->on('product_inventory');

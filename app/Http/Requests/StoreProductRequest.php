@@ -28,8 +28,8 @@ class StoreProductRequest extends FormRequest
             'description' => 'required|min:5|max:250',
             'sku' => 'required|min:3|max:75|unique:products,sku',
             'price' => 'required|digits_between:0,10000',
-            'onsale' => 'sometimes|boolean',
-            'public' => 'sometimes|boolean',
+            'is_onsale' => 'sometimes|boolean', // TODO: En los formularios los dejo como onsale o is_onsale?
+            'is_public' => 'sometimes|boolean', // TODO: En los formularios los dejo como public o is_public
             'category' => 'required|exists:categories,id',
             //'inventory' => 'required|exists:product_inventory,id', TODO: aclarar esta mierda
             'discount' => 'sometimes|exists:discounts,id',

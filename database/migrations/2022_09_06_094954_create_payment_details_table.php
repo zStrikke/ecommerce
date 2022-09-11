@@ -17,7 +17,7 @@ class CreatePaymentDetailsTable extends Migration
             $table->id();
             $table->float('amount');
             $table->string('provider');
-            $table->boolean('status');
+            $table->tinyInteger('status');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('order_id');

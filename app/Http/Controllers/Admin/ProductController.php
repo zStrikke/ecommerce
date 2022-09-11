@@ -33,7 +33,7 @@ class ProductController extends Controller
     public function create()
     {
         // Cogemos los cupones disponibles a aplicar
-        $discounts = \App\Models\Discount::available()->get(['id','name','description','discount_percent']);
+        $discounts = \App\Models\Discount::available()->get(['id','name','description','percent']);
         // Cogemos las Categorias a las que se puede asociar el producto. Estan de padre a hijo para que sea mas facil listarlas.
         $categories = \App\Models\Category::parentCategories()->with('childrens:id,parent_id,name,description')->get(['id','parent_id','name','description']);
 

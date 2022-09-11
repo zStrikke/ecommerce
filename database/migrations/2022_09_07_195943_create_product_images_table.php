@@ -15,7 +15,7 @@ class CreateProductImagesTable extends Migration
     {
         Schema::create('product_images', function (Blueprint $table) { //TODO: Guardar mas datos, estilo resolucion, destacada, etc
             $table->id();
-            $table->boolean('highlight')->default(false);
+            $table->boolean('is_highlight')->default(false);
             $table->string('path')->unique();
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
         // https://laravel.com/docs/8.x/database-testing#has-many-relationships
         \App\Models\User::factory(100)->has(\App\Models\UserAddress::factory(), 'user_addresses')->create();
         $this->call([
+            DiscountSeeder::class,
             CategorySeeder::class,
             ProductSeeder::class,
-            DiscountSeeder::class,
         ]);
         \App\Models\Review::factory(7)->create();
         \App\Models\Review::factory(3)->with_parent()->create();

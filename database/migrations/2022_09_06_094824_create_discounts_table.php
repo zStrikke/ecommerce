@@ -17,8 +17,8 @@ class CreateDiscountsTable extends Migration
             $table->id();
             $table->string('name')->unique()->nullable(false);
             $table->string('description')->nullable();
-            $table->float('discount_percent')->default(0);
-            $table->boolean('active')->default(false);
+            $table->float('percent')->default(0);
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

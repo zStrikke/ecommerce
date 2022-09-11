@@ -23,6 +23,6 @@ class ProductImage extends Model
 
     public function getPathAttribute()
     {
-        return $this->path ?? 'products/fallback/no-image-available.png';
+        return $this->attributes['path'] ?? 'products/fallback/no-image-available.png';
     }
 }

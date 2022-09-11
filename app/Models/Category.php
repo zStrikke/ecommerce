@@ -11,6 +11,17 @@ class Category extends Model
     use HasFactory;
 
     protected $guarded = [];
+    // protected $primaryKey = 'slug';
+    
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     /**
      * Local Scopes
@@ -20,14 +31,21 @@ class Category extends Model
         return $query->whereNull('parent_id');
     }
 
-    public function scopeChildCategories($query)
+    public function scopeChildCategories($query, $parentId)
     {
         return $query->whereNotNull('parent_id');
     }
 
-    public function scopeChildOf($query, $parent)
+    public function scopeGetParentBySlug($query, $slug)
     {
-        return $query->where('parent_id', $parent);
+        return $query->whereNull('parent_id')
+                        ->where('slug', $slug);
+    }
+
+    public function scopeGetChildBySlugAndParentId($query, $slug, $parent_id)
+    {
+        return $query->where('parent_id', $parent_id)
+                        ->where('slug', $slug);
     }
 
     /**
@@ -42,17 +60,17 @@ class Category extends Model
       */
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->hasMany(Product::class);
     }
 
     public function parent()
     {
-        return $this->belongsTo(ProductCategory::class);
+        return $this->belongsTo(self::class, 'parent_id'); // Que elegancia la de Francia
     }
 
-    public function childrens()
+    public function childs()
     {
-        return $this->hasMany(ProductCategory::class, 'parent_id');
+        return $this->hasMany(self::class, 'parent_id'); // Que elegancia la de Francia
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -23,8 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //dd(asset('storage/images/2-carpenter-tools-banner-1.jpg'));
-        return view('front.pages.index');
+        $products = Product::getPublicProducts()->with('images')->get(); // Cogemos todos los productos publicos
+        // dd($products);
+        return view('front.pages.index')
+                ->with(['products' => $products]);
     }
 
     public function shop()

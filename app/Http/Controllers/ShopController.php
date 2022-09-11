@@ -8,13 +8,27 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 
 class ShopController extends Controller
 {
-    public function index()
+
+    public function index($category, $subCategory, $product)
     {
-        return Product::get();
+        
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Category $category, Category $subCategory, Product $product)
+    {
+        //
     }
 
     public function shopCategories(Category $category)

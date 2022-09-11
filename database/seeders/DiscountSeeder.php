@@ -21,24 +21,24 @@ class DiscountSeeder extends Seeder
             [
                 'name' => 'Christmas sales',
                 'description' => $faker->text(),
-                'discount_percent' => 25,
-                'active' => 1,
+                'percent' => 25,
+                'is_active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'Summer sales',
                 'description' => $faker->text(),
-                'discount_percent' => 10,
-                'active' => 1,
+                'percent' => 10,
+                'is_active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'Special Offer',
                 'description' => $faker->text(),
-                'discount_percent' => 50,
-                'active' => 1,
+                'percent' => 50,
+                'is_active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],

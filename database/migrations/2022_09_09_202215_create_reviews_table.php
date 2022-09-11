@@ -18,8 +18,8 @@ class CreateReviewsTable extends Migration
             $table->string('title')->nullable();
             $table->text('content')->nullable(false);
             $table->smallInteger('rating')->nullable();
-            $table->boolean('published')->default(true);
-            $table->boolean('buy_verified')->nullable();
+            $table->boolean('is_public')->default(true);
+            $table->boolean('is_buy_verified')->nullable();
             $table->unsignedBigInteger('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products');
             $table->unsignedBigInteger('user_id')->nullable();
