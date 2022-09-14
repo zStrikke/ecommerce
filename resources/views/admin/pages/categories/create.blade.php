@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-<form method="POST" action="{{ route('admin.category.store') }}">
+<form method="POST" action="{{ route('admin.categories.store') }}">
     <div class="form-row">
         <div class="col-md-6 mb-3">
             <label for="parent_cat-field">State</label>

@@ -24,7 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::getPublicProducts()->with('images')->get(); // Cogemos todos los productos publicos
+        $products = Product::whereHas('images', function(\Illuminate\Database\Eloquent\Builder $query){
+            $query->where('is_highlight', true);
+
+        })->get();
         // dd($products);
         return view('front.pages.index')
                 ->with(['products' => $products]);
