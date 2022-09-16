@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -90,4 +91,13 @@ class User extends Authenticatable
         );
     }
 
+    /**
+     * Setters
+     */
+    //TODO: comprobar si realmente esto previene el problema con resetPassword trait de doble hasheo
+    //https://laracasts.com/discuss/channels/requests/how-to-hash-user-input-password-when-using-form-validation-in-form-request-laravel-5
+    public function setPasswordAttribute($value)
+    {
+        return $this->attributes['password'] = Hash::needsRehash($value) ? Hash::make($value) : $value;
+    }
 }

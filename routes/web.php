@@ -19,7 +19,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
 // Otra forma de afrontar la cosa y evitar urls largas podria ser:
 // Route::get('/c/{category?}/s/{subcategory?}', function(Category $category, ...) { ...
-Route::get('/{category}/{subcategory}/{product}',
+Route::get('/c/{category}/s/{subcategory}/p/{product}',
             [App\Http\Controllers\Front\ProductController::class, 'index'])->where([
                 'categorySlug' => '[a-z]+',
                 'subCategorySlug' => '[a-z]+',
@@ -27,18 +27,20 @@ Route::get('/{category}/{subcategory}/{product}',
             ]);
 
             
-Route::get('/{categorySlug}/{subCategorySlug}/',
+Route::get('/c/{categorySlug}/s/{subCategorySlug}/',
             [App\Http\Controllers\Front\SubCategoryController::class, 'index'])->where([
                 'categorySlug' => '[a-z]+',
                 'subCategorySlug' => '[a-z]+',
             ]);
-
-Route::get('/{categorySlug}',
+            
+Route::get('/c/{categorySlug}',
             [App\Http\Controllers\Front\CategoryController::class, 'index'])->where([
                 'categorySlug' => '[a-z]+',
             ]);
 
+
 Auth::routes();
+
 
 Route::middleware(['web'])->prefix('admin')->name('admin.')->group(function () {
     // php artisan route:list --name=user

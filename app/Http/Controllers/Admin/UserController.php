@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use PDO;
@@ -62,7 +63,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.users.create');
     }
 
     /**
@@ -71,9 +72,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        User::create(
+            $request->only(
+                ['first_name', 'last_name', 'username', 'email', 'password']
+            ));
+
+        return redirect()->route('admin.users.create')->with('status','User Created succesfully');
     }
 
     /**
