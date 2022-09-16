@@ -16,7 +16,7 @@ class Discount extends Model
      */
     public function scopeAvailable($query)
     {
-        return $query->where('active', true);
+        return $query->where('is_active', true);
     }
 
     public function products()

@@ -32,7 +32,6 @@ Route::get('/c/{categorySlug}/s/{subCategorySlug}/',
                 'categorySlug' => '[a-z]+',
                 'subCategorySlug' => '[a-z]+',
             ]);
-            
 Route::get('/c/{categorySlug}',
             [App\Http\Controllers\Front\CategoryController::class, 'index'])->where([
                 'categorySlug' => '[a-z]+',
@@ -49,6 +48,7 @@ Route::middleware(['web'])->prefix('admin')->name('admin.')->group(function () {
 
 // Me gusta mas esta forma
 Route::group(['middleware' => 'web', 'prefix' => 'admin', 'as' => 'admin.'], function (){
+    Route::get('/', [App\Http\Controllers\AdminController::class, 'index']);
     Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
 });

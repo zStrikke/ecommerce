@@ -35,7 +35,15 @@ class ProductController extends Controller
         // Cogemos los cupones disponibles a aplicar
         $discounts = \App\Models\Discount::available()->get(['id','name','description','percent']);
         // Cogemos las Categorias a las que se puede asociar el producto. Estan de padre a hijo para que sea mas facil listarlas.
-        $categories = \App\Models\Category::parentCategories()->with('childrens:id,parent_id,name,description')->get(['id','parent_id','name','description']);
+        $categories = \App\Models\Category::parentCategories()->with('childs:id,parent_id,name,description')->get(['id','parent_id','name','description']);
+        $categories2 = \App\Models\Category::has('childs')->get();
+
+        dd($categories, $categories2);
+
+        $products = Product::whereHas('images', function(\Illuminate\Database\Eloquent\Builder $query){
+            $query->where('is_highlight', true);
+
+        })->get();
 
         return view('admin.pages.products.create')
                 ->with([
