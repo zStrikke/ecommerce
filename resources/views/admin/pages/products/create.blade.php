@@ -44,10 +44,10 @@
   </div>
   <div class="form-row">
     <div class="form-group col-md-4">
-      <label for="inputProducImage">{{ __('Image') }}</label>
+      <label for="inputProductImage">{{ __('Image') }}</label>
       <div class="custom-file">
-        <input type="file" name="file" multiple class="custom-file-input @error('file') is-invalid @enderror" id="inputProducImage">
-        <label class="custom-file-label" for="inputProducImage">{{ __('Choose file') }}</label>
+        <input type="file" name="file" multiple class="custom-file-input @error('file') is-invalid @enderror" id="inputProductImage">
+        <label class="custom-file-label" for="inputProductImage">{{ __('Choose file') }}</label>
         @error('file')
           <div id="validationServerProductImageFeedback" class="invalid-feedback">{{ $message }}</div>
         @enderror
