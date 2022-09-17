@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class StoreUserRequest extends FormRequest
 {
@@ -27,12 +28,12 @@ class StoreUserRequest extends FormRequest
             'first_name' => 'required|string|min:3|max:255',
             'last_name' => 'required|string|min:3|max:255',
             'username' => 'required|min:3|max:255|unique:users,username',
-            'password' => 'required|string|min:8|confirmed', // TODO: Mejorar esta validacion
+            'password' => Password::min(8)->letters()->mixedCase()->numbers()->symbols()->uncompromised(),
             // Esto esta guay pero no me salian buenos mensajes: https://stackoverflow.com/questions/31539727/laravel-password-validation-rule
             //https://laravel.com/docs/8.x/validation#validating-passwords
             // Imagino que concatenando buenas reglas de validacion se puede conseguir casi.
             'email' => 'required|string|email|max:255|unique:users,email',
-            'file' => 'required|image|min:1|max:4000'
+            'file' => 'sometimes|required|image|min:1|max:4000'
         ];
     }
 
