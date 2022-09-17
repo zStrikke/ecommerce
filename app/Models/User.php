@@ -74,6 +74,14 @@ class User extends Authenticatable
         return $this->hasMany(OrderDetails::class);
     }
 
+    /**
+     * Get the user's image.
+     */
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
     // public function sessions()
     // {
     //     return $this->hasMany(ShoppingSession::class);

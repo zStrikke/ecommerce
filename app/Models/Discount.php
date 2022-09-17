@@ -23,5 +23,13 @@ class Discount extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    /**
+     * Get the discount's image.
+     */
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
     
 }
