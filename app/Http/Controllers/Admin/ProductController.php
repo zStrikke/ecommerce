@@ -60,6 +60,13 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+        /**
+         * $request->safe()
+         * This method returns an instance of Illuminate\Support\ValidatedInput. 
+         * This object exposes only, except, and all methods to retrieve a subset 
+         * of the validated data or the entire array of validated data:
+         */
+        
         $product = \App\Models\Product::create(
             $request->safe()->except('file')
         );
