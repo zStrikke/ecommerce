@@ -98,7 +98,7 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.users.create')->with('status','User Created succesfully');
+        return redirect()->route('admin.users.show', [$user->username])->with('status','User Created succesfully');
     }
 
     /**
@@ -121,7 +121,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return $user;
+        $user->load('profile');
+        return view('admin.pages.users.edit', ['user' => $user]);
     }
 
     /**

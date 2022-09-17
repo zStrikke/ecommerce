@@ -59,7 +59,7 @@ class User extends Authenticatable
      /**
       * Relations
       */
-    public function user_addresses()
+    public function profile()
     {
         return $this->hasMany(UserAddress::class);
     }
