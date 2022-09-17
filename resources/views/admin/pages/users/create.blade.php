@@ -73,6 +73,18 @@
       @enderror
       </div>
   </div>
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="inputUserImage">{{ __('Image') }}</label>
+      <div class="custom-file">
+        <input type="file" name="file" multiple class="custom-file-input @error('file') is-invalid @enderror" id="inputUserImage">
+        <label class="custom-file-label" for="inputUserImage">{{ __('Choose file') }}</label>
+        @error('file')
+          <div id="validationServerUserImageFeedback" class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
+    </div>
+  </div>
   @csrf
   <button class="btn btn-primary" type="submit">{{ __('Create') }}</button>
 </form>

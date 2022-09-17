@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
-use PDO;
-
+use Illuminate\Support\Facades\App;
 class UserController extends Controller
 {
     /**
@@ -63,6 +62,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        // if (App::environment('local')) {
+            
+        // }
         return view('admin.pages.users.create');
     }
 
@@ -74,10 +76,27 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        User::create(
+        $user = User::create(
             $request->only(
                 ['first_name', 'last_name', 'username', 'email', 'password']
             ));
+        // Ya tenemos el usuario creado, que es lo importante. Ahora vemos de guardar su imagen.
+        // https://laracasts.com/discuss/channels/requests/how-to-hash-user-input-password-when-using-form-validation-in-form-request-laravel-5
+
+        if($request->hasFile('file') && $request->file('file')->isValid()){
+            
+            $path = $request->file('file')->store('users/'. $user->id .'/profile', 'public');
+    
+            $user->image()->create([
+                'guess_extension' => $request->file('file')->guessExtension(),
+                'mime_type' => $request->file('file')->getMimeType(),
+                'client_original_name' => $request->file('file')->getClientOriginalName(),
+                'client_original_extension' => $request->file('file')->getClientOriginalExtension(),
+                'client_mime_type' => $request->file('file')->getClientMimeType(),
+                'guess_client_extension' => $request->file('file')->guessClientExtension(),
+                'path' => $path,
+            ]);
+        }
 
         return redirect()->route('admin.users.create')->with('status','User Created succesfully');
     }
@@ -90,7 +109,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('admin.pages.users.show')
+                ->with('user', $user);
     }
 
     /**
@@ -101,7 +121,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return $user;
     }
 
     /**

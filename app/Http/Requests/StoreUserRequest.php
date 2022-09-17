@@ -29,8 +29,10 @@ class StoreUserRequest extends FormRequest
             'username' => 'required|min:3|max:255|unique:users,username',
             'password' => 'required|string|min:8|confirmed', // TODO: Mejorar esta validacion
             // Esto esta guay pero no me salian buenos mensajes: https://stackoverflow.com/questions/31539727/laravel-password-validation-rule
+            //https://laravel.com/docs/8.x/validation#validating-passwords
             // Imagino que concatenando buenas reglas de validacion se puede conseguir casi.
             'email' => 'required|string|email|max:255|unique:users,email',
+            'file' => 'required|image|min:1|max:4000'
         ];
     }
 
